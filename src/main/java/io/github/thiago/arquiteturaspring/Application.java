@@ -3,10 +3,12 @@ package io.github.thiago.arquiteturaspring;
 import org.springframework.boot.Banner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.ConfigurableEnvironment;
 
 @SpringBootApplication
+@EnableConfigurationProperties
 public class Application {
 
 	public static void main(String[] args) {
@@ -14,6 +16,7 @@ public class Application {
 
         SpringApplicationBuilder builder = new SpringApplicationBuilder(Application.class);
         builder.bannerMode(Banner.Mode.OFF);
+        builder.lazyInitialization(true);
         builder.run(args);
 
 
@@ -24,6 +27,8 @@ public class Application {
         System.out.println("Nome da aplicação: " + applicationName);
 
 
+        ExemploValue value = applicationContext.getBean(ExemploValue.class);
+        value.imprimirVariavel();
 	}
 
 }
